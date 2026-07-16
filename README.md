@@ -2,8 +2,9 @@
 
 Project page for **Consensus / Operator-Splitting SCP (OS-SCP)**.
 
-Live site (after GitHub Pages is enabled):  
-https://nataliapavlasek16.github.io/consensus-scp/
+Live site:  
+https://nataliapavlasek.com/consensus-scp/  
+(also redirects from https://nataliapavlasek16.github.io/consensus-scp/)
 
 Personal site listing:  
 https://nataliapavlasek.com/projects.html
