@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<!--
+  Consensus SCP project page
+  Shared collaborator repo — GitHub Pages
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Consensus SCP — Project</title>
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+    <link rel="stylesheet" href="assets/css/project_main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+    <style>
+      .project-links a { display:inline-block; margin-right:1rem; }
+      #projectAuthors, #projectYear { margin: 0; padding: 0; line-height: 1.2; }
+      #projectAuthors { margin-bottom: 1rem; }
+      #projectYear { margin-bottom: 1rem; color: #666; }
+      #projectAbstract p { margin: 0 0 0.75rem 0; }
+      .project-links { margin-top: 0.75rem; }
+
+      /* Full-width layout (standalone Pages site) */
+      html, body { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
+      #wrapper, #main { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; position: static !important; box-sizing: border-box !important; }
+      #main { margin-left: 0 !important; }
+      #main > section, #main > section > .container, .container {
+        width: calc(100% - 4rem) !important;
+        max-width: 56rem !important;
+        margin: 0 auto !important;
+        padding: 2rem !important;
+        box-sizing: border-box !important;
+      }
+      #main > section > .popout { display: none !important; }
+      #previewNotes ol { list-style: decimal; margin: 0 0 1rem 1.25rem; padding: 0; }
+      #previewNotes ol li { margin-bottom: 0.75rem; }
+    </style>
+  </head>
+
+  <body class="is-preload">
+    <div id="wrapper">
+      <div id="main">
+        <section id="research">
+          <div class="container" style="padding-top: 3em;">
+            <p style="margin:0 0 1.5rem 0; font-size:0.9em;">
+              <a href="https://nataliapavlasek.com/projects.html">&larr; Back to projects</a>
+            </p>
+            <h2 id="projectTitle">Consensus Sequential Convex Programming</h2>
+            <p id="projectAuthors">Justin Ganiban, Natalia Pavlasek, Beh&ccedil;et A&ccedil;&imath;kme&scedil;e</p>
+            <p id="projectYear">2026</p>
+            <div id="projectAbstract">
+              <p><strong>Abstract:</strong> Trajectory optimization methods provide an efficient and reliable means of computing feasible trajectories in nonconvex solution spaces. However, a well-known limitation of these algorithms is that they are inherently local in nature, and typically converge to a solution in the neighborhood of their initial guess. This paper presents a sequential operator-splitting framework, based on the alternating direction method of multipliers (ADMM), aimed at promoting exploration within the sequential convex programming (SCP) framework. In particular, diverse initial solutions are modeled as agents within the consensus ADMM framework. Driving these agents toward consensus facilitates exploration of the nonconvex optimization landscape. Numerical simulations demonstrate that the proposed method consistently yields equivalent or lower-cost solutions compared to the standard SCP approach, with the same or fewer agents.</p>
+            </div>
+            <div class="project-links" id="previewLinks">
+              <a href="https://arxiv.org/pdf/2511.14752" target="_blank" rel="noopener"><i class="far fa-file-alt"></i> ECC 2026 Paper</a>
+            </div>
+            <div id="previewNotes" style="margin-top:1em;color:#444;">
+
+              <div class="overview-figures" style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-start; justify-content:center; margin:0 0 1.5rem 0;">
+                <figure style="margin:0; flex:0 1 auto; max-width:100%; text-align:center;">
+                  <a href="scp_overview.pdf" target="_blank" rel="noopener">
+                    <img src="scp_overview.png" alt="Overview of standard multi-start SCP" style="height:280px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto;" />
+                  </a>
+                  <figcaption style="margin-top:0.5rem; font-size:0.9em; color:#666;">Standard multi-start SCP</figcaption>
+                </figure>
+                <figure style="margin:0; flex:0 1 auto; max-width:100%; text-align:center;">
+                  <a href="osscp_overview.pdf" target="_blank" rel="noopener">
+                    <img src="osscp_overview.png" alt="Overview of operator-splitting SCP (OS-SCP)" style="height:280px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto;" />
+                  </a>
+                  <figcaption style="margin-top:0.5rem; font-size:0.9em; color:#666;">Operator-splitting SCP (OS-SCP)</figcaption>
+                </figure>
+              </div>
+
+              <p>
+                Sequential convex programming (SCP) efficiently finds locally optimal trajectories,
+                but its solution depends heavily on the initial guess. In this work, multiple agents with diverse initializations each run SCP,
+                then are coupled through consensus ADMM so they share information and are pulled toward a common solution.
+                That coupling encourages exploration of nonconvex landscapes and can escape local stationary points
+                where standard SCP (or independent multi-start) stalls.
+              </p>
+
+              <h3>Consensus ADMM</h3>
+              <p>
+                Consensus ADMM splits an optimization problem across \(n_a\) agents with a shared global variable \(\bar{z}\).
+                Starting from
+              </p>
+              <p>$$
+                \min_{z}~\sum_{i} p_i(z)+q(z),
+              $$</p>
+              <p>we introduce local copies \(z_i\) and rewrite the problem as</p>
+              <p>$$
+                \min_{z_1,\ldots,z_{n_a},\bar{z}}~\sum_{i=1}^{n_a}p_i(z_i)+q(\bar{z})
+                \quad\mathrm{s.t.}\quad
+                z_i=\bar{z},\quad i\in[n_a].
+              $$</p>
+              <p>The ADMM iterates are</p>
+              <p>$$
+                \begin{aligned}
+                z_i^{j+1}
+                &=\operatorname*{arg\,min}_{z}\,
+                p_i(z)+\frac{\rho}{2}\bigl\|z-\bar{z}^{j}+\xi_i^{j}\bigr\|_2^{2},\\
+                \bar{z}^{j+1}
+                &=\operatorname*{arg\,min}_{\bar{z}}\,
+                q(\bar{z})+\frac{\rho}{2}\sum_{i=1}^{n_a}\bigl\|z_i^{j+1}-\bar{z}+\xi_i^{j}\bigr\|_2^{2},\\
+                \xi_i^{j+1}
+                &=\xi_i^{j}+\bigl(z_i^{j+1}-\bar{z}^{j+1}\bigr),
+                \end{aligned}
+              $$</p>
+              <p>
+                where \(\xi_i\) are dual variables and \(\rho&gt;0\) is the consensus penalty parameter.
+                The primal and dual residuals
+                \(\delta_{r_i}^{j+1}=z_i^{j+1}-\bar{z}^{j+1}\) and
+                \(\delta_s^{j+1}=\rho(\bar{z}^{j+1}-\bar{z}^{j})\)
+                measure agreement with consensus.
+              </p>
+
+              <h3>Sequential convex programming</h3>
+              <p>
+                Consider the discrete-time optimal control problem with stacked trajectory variables
+                \(z_k=[x_k^\top~u_k^\top]^\top\) and \(z=z_{0:K}\):
+              </p>
+              <p>$$
+                \begin{aligned}
+                \min_{z}~&
+                J_K(z_K)+\sum_{k=0}^{K-1}J_k(z_k)\\
+                \mathrm{s.t.}~&
+                e^{x}z_{k+1}=f_k(z_k),\quad k\in[K-1],\\
+                &g(z_k)\le 0,\quad h(z_k)=0,\quad z_k\in\mathcal{Z}^c_k,\quad k\in[K].
+                \end{aligned}
+              $$</p>
+              <p>
+                SCP solves this by successive convexifications. At iterate \(j\), nonconvex terms are
+                linearized about \(z^{j}\) and penalized, yielding
+              </p>
+              <p>$$
+                \begin{aligned}
+                \Theta(z^{j},z)
+                &:=
+                \tilde{J}_K(z_K^{j},z_K)
+                +\sum_{k=0}^{K-1}\tilde{J}_k(z_k^{j},z_k)
+                +\mathbf{1}_{\mathcal{Z}^{c}}(z)\\
+                &\quad
+                +w^{1}\sum_{k=0}^{K-1}\bigl\|\tilde{f}_k(z_k^{j},z_k)\bigr\|_1
+                +w^{2}\mathbf{1}_{n_g}^{\top}\bigl|\tilde{g}(z^{j},z)\bigr|
+                +w^{3}\bigl\|\tilde{h}(z^{j},z)\bigr\|_1,
+                \end{aligned}
+              $$</p>
+              <p>with a proximal trust-region term</p>
+              <p>$$
+                \Gamma(z^{j},z)
+                :=
+                \Theta(z^{j},z)
+                +\frac{w^{\mathrm{p}}}{2}\sum_{k=0}^{K}\bigl\|z_k-z_k^{j}\bigr\|_2^{2}.
+              $$</p>
+              <p>Standard SCP then repeatedly solves the convex subproblem</p>
+              <p>$$
+                z^{j+1}=\operatorname*{arg\,min}_{z}~\Gamma(z^{j},z).
+              $$</p>
+
+              <h3>Operator-splitting SCP (OS-SCP)</h3>
+              <p>
+                OS-SCP embeds SCP into consensus ADMM. Each agent solves a convex subproblem whose
+                proximal term pulls toward the current consensus (rather than only toward its own previous iterate):
+              </p>
+              <p>$$
+                z_i^{j+1}
+                =\operatorname*{arg\,min}_{z}~
+                \Theta(z_i^{j},z)
+                +\frac{\rho}{2}\bigl\|z-\bar{z}^{j}+\xi_i^{j}\bigr\|_2^{2},
+                \qquad i\in[n_a],
+              $$</p>
+              <p>or equivalently \(z_i^{j+1}=\operatorname*{arg\,min}_{z}\,\Gamma^{c}(z_i^{j},\bar{z}^{j},\xi_i^{j},z)\) with</p>
+              <p>$$
+                \Gamma^{c}(z_i^{j},\bar{z}^{j},\xi_i^{j},z)
+                =
+                \Theta(z_i^{j},z)
+                +\frac{\rho}{2}\bigl\|z-\bar{z}^{j}+\xi_i^{j}\bigr\|_2^{2}.
+              $$</p>
+              <p>
+                The consensus update enforces feasibility of the shared trajectory with respect to the
+                convexified constraint set
+                \(\mathcal{Z}=\mathcal{Z}^{c}\cap\mathcal{Z}^{n}\),
+                where \(\mathcal{Z}^{n}\) is obtained by linearizing dynamics and nonconvex constraints
+                about the mean trajectory
+                \(\hat{z}^{j}=\frac{1}{n_a}\sum_{i=1}^{n_a}z_i^{j}\).
+                Taking \(q(\bar{z})=\mathbf{1}_{\mathcal{Z}}(\bar{z})\) gives
+              </p>
+              <p>$$
+                \bar{z}^{j+1}
+                =\operatorname*{arg\,min}_{\bar{z}}~
+                \mathbf{1}_{\mathcal{Z}}(\bar{z})
+                +\frac{\rho}{2}\sum_{i=1}^{n_a}\bigl\|z_i^{j+1}-\bar{z}+\xi_i^{j}\bigr\|_2^{2},
+              $$</p>
+              <p>which is the projection</p>
+              <p>$$
+                \bar{z}^{j+1}
+                =\Pi_{\mathcal{Z}}\!\left(\frac{1}{n_a}\sum_{i=1}^{n_a}\bigl(z_i^{j+1}+\xi_i^{j}\bigr)\right),
+                \qquad
+                \Pi_{\mathcal{Z}}(v)=\operatorname*{arg\,min}_{\bar{z}\in\mathcal{Z}}\|\bar{z}-v\|_2^{2}.
+              $$</p>
+              <p>The dual variables are then updated by</p>
+              <p>$$
+                \xi_i^{j+1}=\xi_i^{j}+\bigl(z_i^{j+1}-\bar{z}^{j+1}\bigr).
+              $$</p>
+
+              <h3>Main algorithm</h3>
+              <p><strong>Algorithm (OS-SCP).</strong>
+                Given tolerances \(\epsilon_r,\epsilon_s,\epsilon_c&gt;0\), iteration limit \(j^{\mathrm{max}}\),
+                and initial trajectories \(z_i^{0}\) for \(i\in[n_a]\):
+              </p>
+              <ol>
+                <li>
+                  <strong>Primal update (in parallel):</strong> for each agent \(i=1,\ldots,n_a\),
+                  \[
+                    z_i^{j+1}\leftarrow\operatorname*{arg\,min}_{z}\,\Gamma^{c}(z_i^{j},\bar{z}^{j},\xi_i^{j},z).
+                  \]
+                </li>
+                <li>
+                  <strong>Consensus update:</strong>
+                  \[
+                    \bar{z}^{j+1}
+                    \leftarrow
+                    \Pi_{\mathcal{Z}}\!\left(\frac{1}{n_a}\sum_{i=1}^{n_a}\bigl(z_i^{j+1}+\xi_i^{j}\bigr)\right).
+                  \]
+                </li>
+                <li>
+                  <strong>Dual update:</strong> for each agent \(i\),
+                  \[
+                    \xi_i^{j+1}\leftarrow\xi_i^{j}+\bigl(z_i^{j+1}-\bar{z}^{j+1}\bigr).
+                  \]
+                </li>
+                <li>
+                  Increment \(j\) and repeat until the primal/dual residuals fall below
+                  \(\epsilon_r,\epsilon_s\), the consensus cost change is below \(\epsilon_c\),
+                  or \(j&gt;j^{\mathrm{max}}\).
+                </li>
+              </ol>
+              <p>
+                Diverse initializations attract agents to different regions of the nonconvex landscape;
+                the consensus coupling then pulls them toward agreement and can free agents from
+                local stationary points that trap independent multi-start SCP.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section id="footer">
+        <div class="container">
+          <ul class="copyright">
+            <li>&copy; Natalia Pavlasek. All rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
