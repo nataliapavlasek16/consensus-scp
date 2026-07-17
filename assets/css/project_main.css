@@ -128,7 +128,7 @@ input, select, textarea {
 
     a:hover {
       border-bottom-color: transparent;
-      color: #B2156E !important;
+      color: #4a4648 !important;
     }
 
   strong, b {
@@ -1847,7 +1847,7 @@ input, select, textarea {
 
 .pub span.me {
   font-weight: bold;
-  color: #B2156E;
+  color: #595959;
 }
 
 /* Initial state of the div, hidden */
@@ -2464,7 +2464,7 @@ input, select, textarea {
     -webkit-justify-content: space-between;
     -ms-justify-content: space-between;
     justify-content: space-between;
-    background: #ae578e;
+    background: #515151;
     color: #ffffff;
     /* height: 100%; */
     overflow-y: auto;
@@ -2588,7 +2588,7 @@ input, select, textarea {
 
             #header > nav ul li a.active {
               background: #fff;
-              color: #7f4484 !important;
+              color: #7d7d7d !important;
             }
 
           #header > nav ul li:first-child {
@@ -3161,7 +3161,7 @@ input, select, textarea {
 		}
 
 	body {
-		background-color: #9e1919;
+		background-color: #6c6c6c;
 		color: #000000;
 	}
 
@@ -4887,8 +4887,8 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			box-shadow: inset 0 0 0 2px #dd7ec8;
-			color: #dd7ec8 !important;
+			box-shadow: inset 0 0 0 2px #d1d1d1;
+			color: #d2d2d2 !important;
 		}
 
 		input[type="submit"]:active,
@@ -4897,8 +4897,8 @@ input, select, textarea {
 		button:active,
 		.button:active {
 			background-color: rgba(73, 252, 212, 0.25);
-			box-shadow: inset 0 0 0 2px #dd7ec8;
-			color: #dd7ec8 !important;
+			box-shadow: inset 0 0 0 2px #d6d6d6;
+			color: #d8d8d8 !important;
 		}
 
 		input[type="submit"].small,
@@ -5139,7 +5139,7 @@ input, select, textarea {
 		input[type="url"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #dd7ec8;
+			border-color: #dddddd;
 		}
 
 	label {
@@ -6295,7 +6295,7 @@ input, select, textarea {
 		}
 
 			#wrapper > section > header:before {
-				background: #ae578e;
+				background: #929292;
 				content: '';
 				display: block;
 				margin-top: 1rem;
@@ -6308,7 +6308,7 @@ input, select, textarea {
 			}
 
 				#wrapper > section > header h1:before, #wrapper > section > header h2:before {
-					background: #ae578e;
+					background: #929292;
 					content: '';
 					display: block;
 					height: 2px;
@@ -6317,7 +6317,7 @@ input, select, textarea {
 				}
 
 				#wrapper > section > header h1:after, #wrapper > section > header h2:after {
-					background: #ae578e;
+					background: #929292;
 					border-radius: 0.5rem;
 					content: '';
 					display: block;
@@ -6374,7 +6374,7 @@ input, select, textarea {
 			}
 
 			#wrapper > section:last-of-type > header:after {
-				background: #ae578e;
+				background: #929292;
 				border-radius: 0.5rem;
 				bottom: -1.5rem;
 				content: '';
